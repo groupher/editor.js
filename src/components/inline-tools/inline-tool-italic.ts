@@ -83,6 +83,6 @@ export default class ItalicInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
-    return 'CMD+I';
+    return 'CMD+SHIFT+I';
   }
 }

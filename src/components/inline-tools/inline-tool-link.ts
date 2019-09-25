@@ -208,7 +208,7 @@ export default class LinkInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
-    return 'CMD+K';
+    return 'CMD+SHIFT+K';
   }
 
   private toggleActions(): void {

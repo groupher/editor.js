@@ -83,6 +83,6 @@ export default class BoldInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
-    return 'CMD+B';
+    return 'CMD+SHIFT+B';
   }
 }

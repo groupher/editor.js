@@ -31,6 +31,8 @@ export default class Toolbox extends Module {
       tooltipShown: 'ce-toolbox__tooltip--shown',
       tooltipShortcut: 'ce-toolbox__tooltip-shortcut',
       openedToolbarHolderModifier: 'codex-editor--toolbox-opened',
+      // groupher-customize
+      plusButton: 'ce-toolbar__plus',
     };
   }
 
@@ -110,6 +112,9 @@ export default class Toolbox extends Module {
 
     this.opened = true;
     this.flipper.activate();
+
+    // groupher-customize
+    this.rotatePlusButton();
   }
 
   /**
@@ -123,6 +128,9 @@ export default class Toolbox extends Module {
 
     this.opened = false;
     this.flipper.deactivate();
+
+    // groupher-customize
+    this.resetPlusButton();
   }
 
   /**
@@ -141,6 +149,32 @@ export default class Toolbox extends Module {
    */
   public hideTooltip(): void {
     this.nodes.tooltip.classList.remove(this.CSS.tooltipShown);
+  }
+
+  /**
+   * set plus button to add, only when toolbar is closed
+   * groupher-customize
+   */
+  private resetPlusButton(): void {
+    if (!this.opened) {
+      const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
+      if (plusButton) {
+        plusButton.style.transform = plusButton.style.transform.replace('rotate(45deg)', '');
+      }
+    }
+  }
+
+  /**
+   * set plus button to cross
+   * groupher-customize
+   */
+  private rotatePlusButton(): void {
+    const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
+    const hasRotated = plusButton.style.transform.indexOf('rotate(45deg)') >= 0;
+
+    if (plusButton && !hasRotated) {
+      plusButton.style.transform = plusButton.style.transform + 'rotate(45deg)';
+    }
   }
 
   /**

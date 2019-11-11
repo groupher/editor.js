@@ -159,7 +159,7 @@ export default class Toolbox extends Module {
     if (!this.opened) {
       const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
       if (plusButton) {
-        plusButton.style.transform = plusButton.style.transform.replace('rotate(45deg)', '');
+        plusButton.style.transform = '';
       }
     }
   }
@@ -173,7 +173,7 @@ export default class Toolbox extends Module {
     const hasRotated = plusButton.style.transform.indexOf('rotate(45deg)') >= 0;
 
     if (plusButton && !hasRotated) {
-      plusButton.style.transform = plusButton.style.transform + 'rotate(45deg)';
+      plusButton.style.transform = plusButton.style.transform + 'translateY(-50%) rotate(45deg)';
     }
   }
 

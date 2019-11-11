@@ -46,7 +46,7 @@
     position: absolute;
     left: calc(var(--toolbox-buttons-size) * -1);
     flex-shrink: 0;
-    transition: all .2s;
+    transition: transform .2s;
 
     &--hidden {
       display: none;

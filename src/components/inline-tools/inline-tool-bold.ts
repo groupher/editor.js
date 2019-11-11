@@ -83,6 +83,7 @@ export default class BoldInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
+    // groupher-customize
     return 'CMD+SHIFT+B';
   }
 }

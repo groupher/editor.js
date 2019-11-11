@@ -208,6 +208,7 @@ export default class LinkInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
+    // groupher-customize
     return 'CMD+SHIFT+K';
   }
 

@@ -1,5 +1,5 @@
 import $ from '../dom';
-import {InlineTool, SanitizerConfig} from '../../../types';
+import { InlineTool, SanitizerConfig } from '../../../types';
 
 /**
  * Italic Tool
@@ -16,6 +16,11 @@ export default class ItalicInlineTool implements InlineTool {
    * @return {boolean}
    */
   public static isInline = true;
+
+  /**
+   * Title for hover-tooltip
+   */
+  public static title: string = 'Italic';
 
   /**
    * Sanitizer Rule
@@ -45,7 +50,7 @@ export default class ItalicInlineTool implements InlineTool {
   /**
    * Elements
    */
-  private nodes: {button: HTMLButtonElement} = {
+  private nodes: { button: HTMLButtonElement } = {
     button: null,
   };
 
@@ -56,7 +61,7 @@ export default class ItalicInlineTool implements InlineTool {
     this.nodes.button = document.createElement('button') as HTMLButtonElement;
     this.nodes.button.type = 'button';
     this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier);
-    this.nodes.button.appendChild($.svg('italic', 34, 34));
+    this.nodes.button.appendChild($.svg('italic', 4, 11));
     return this.nodes.button;
   }
 

@@ -1,8 +1,9 @@
 import Module from '../../__module';
 import $ from '../../dom';
-import _ from '../../utils';
-import {BlockToolConstructable} from '../../../../types';
+import * as _ from '../../utils';
+import { BlockToolConstructable } from '../../../../types';
 import Flipper from '../../flipper';
+import { BlockToolAPI } from '../../block';
 
 /**
  * @class Toolbox
@@ -22,17 +23,16 @@ export default class Toolbox extends Module {
    * toolboxOpened: string, tooltip: string, tooltipShown: string, tooltipShortcut: string}}
    */
   get CSS() {
-    return  {
+    return {
       toolbox: 'ce-toolbox',
       toolboxButton: 'ce-toolbox__button',
-      toolboxButtonActive : 'ce-toolbox__button--active',
+      toolboxButtonActive: 'ce-toolbox__button--active',
       toolboxOpened: 'ce-toolbox--opened',
-      tooltip: 'ce-toolbox__tooltip',
-      tooltipShown: 'ce-toolbox__tooltip--shown',
-      tooltipShortcut: 'ce-toolbox__tooltip-shortcut',
       openedToolbarHolderModifier: 'codex-editor--toolbox-opened',
       // groupher-customize
       plusButton: 'ce-toolbar__plus',
+      buttonTooltip: 'ce-toolbox-button-tooltip',
+      buttonShortcut: 'ce-toolbox-button-tooltip__shortcut',
     };
   }
 
@@ -55,13 +55,11 @@ export default class Toolbox extends Module {
    */
   public nodes: {
     toolbox: HTMLElement,
-    tooltip: HTMLElement,
     buttons: HTMLElement[],
   } = {
-    toolbox: null,
-    tooltip: null,
-    buttons: [],
-  };
+      toolbox: null,
+      buttons: [],
+    };
 
   /**
    * How many tools displayed in Toolbox
@@ -83,7 +81,6 @@ export default class Toolbox extends Module {
     $.append(this.Editor.Toolbar.nodes.content, this.nodes.toolbox);
 
     this.addTools();
-    this.addTooltip();
     this.enableFlipper();
   }
 
@@ -93,7 +90,7 @@ export default class Toolbox extends Module {
    * @param {MouseEvent|KeyboardEvent} event
    * @param {string} toolName
    */
-  public toolButtonActivate(event: MouseEvent|KeyboardEvent, toolName: string): void {
+  public toolButtonActivate(event: MouseEvent | KeyboardEvent, toolName: string): void {
     const tool = this.Editor.Tools.toolsClasses[toolName] as BlockToolConstructable;
 
     this.insertNewBlock(tool, toolName);
@@ -121,8 +118,6 @@ export default class Toolbox extends Module {
    * Close Toolbox
    */
   public close(): void {
-    this.hideTooltip();
-
     this.nodes.toolbox.classList.remove(this.CSS.toolboxOpened);
     this.Editor.UI.nodes.wrapper.classList.remove(this.CSS.openedToolbarHolderModifier);
 
@@ -130,7 +125,7 @@ export default class Toolbox extends Module {
     this.flipper.deactivate();
 
     // groupher-customize
-    this.resetPlusButton();
+    // this.resetPlusButton();
   }
 
   /**
@@ -147,22 +142,22 @@ export default class Toolbox extends Module {
   /**
    * Hide toolbox tooltip
    */
-  public hideTooltip(): void {
-    this.nodes.tooltip.classList.remove(this.CSS.tooltipShown);
-  }
+  // public hideTooltip(): void {
+  //   this.nodes.tooltip.classList.remove(this.CSS.tooltipShown);
+  // }
 
   /**
    * set plus button to add, only when toolbar is closed
    * groupher-customize
    */
-  private resetPlusButton(): void {
-    if (!this.opened) {
-      const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
-      if (plusButton) {
-        plusButton.style.transform = '';
-      }
-    }
-  }
+  // private resetPlusButton(): void {
+  //   if (!this.opened) {
+  //     const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
+  //     if (plusButton) {
+  //       plusButton.style.transform = '';
+  //     }
+  //   }
+  // }
 
   /**
    * set plus button to cross
@@ -185,7 +180,7 @@ export default class Toolbox extends Module {
 
     for (const toolName in tools) {
       if (tools.hasOwnProperty(toolName)) {
-        this.addTool(toolName, tools[toolName]  as BlockToolConstructable);
+        this.addTool(toolName, tools[toolName] as BlockToolConstructable);
       }
     }
   }
@@ -224,7 +219,7 @@ export default class Toolbox extends Module {
 
     const userToolboxSettings = this.Editor.Tools.getToolSettings(toolName)[userSettings.TOOLBOX] || {};
 
-    const button = $.make('li', [ this.CSS.toolboxButton ]);
+    const button = $.make('li', [this.CSS.toolboxButton]);
 
     button.dataset.tool = toolName;
     button.innerHTML = userToolboxSettings.icon || toolToolboxSettings.icon;
@@ -237,19 +232,18 @@ export default class Toolbox extends Module {
     /**
      * Add click listener
      */
-    this.Editor.Listeners.on(button, 'click', (event: KeyboardEvent|MouseEvent) => {
+    this.Editor.Listeners.on(button, 'click', (event: KeyboardEvent | MouseEvent) => {
       this.toolButtonActivate(event, toolName);
     });
 
     /**
      * Add listeners to show/hide toolbox tooltip
      */
-    this.Editor.Listeners.on(button, 'mouseenter', () => {
-      this.showTooltip(button, toolName);
-    });
+    const tooltipContent = this.drawTooltip(toolName);
 
-    this.Editor.Listeners.on(button, 'mouseleave', () => {
-      this.hideTooltip();
+    this.Editor.Tooltip.onHover(button, tooltipContent, {
+      placement: 'bottom',
+      hidingDelay: 200,
     });
 
     /**
@@ -266,22 +260,12 @@ export default class Toolbox extends Module {
   }
 
   /**
-   * Add toolbox tooltip to page
+   * Draw tooltip for toolbox tools
+   *
+   * @param {String} toolName - toolbox tool name
+   * @return { HTMLElement }
    */
-  private addTooltip(): void {
-    this.nodes.tooltip = $.make('div', this.CSS.tooltip, {
-      innerHTML: '',
-    });
-
-    $.append(this.Editor.Toolbar.nodes.content, this.nodes.tooltip);
-  }
-
-  /**
-   * Show tooltip for toolbox button
-   * @param {HTMLElement} button
-   * @param {string} toolName
-   */
-  private showTooltip(button: HTMLElement, toolName: string): void {
+  private drawTooltip(toolName: string): HTMLElement {
     const toolSettings = this.Editor.Tools.getToolSettings(toolName);
     const toolboxSettings = this.Editor.Tools.available[toolName][this.Editor.Tools.INTERNAL_SETTINGS.TOOLBOX] || {};
     const userToolboxSettings = toolSettings.toolbox || {};
@@ -289,48 +273,20 @@ export default class Toolbox extends Module {
 
     let shortcut = toolSettings[this.Editor.Tools.USER_SETTINGS.SHORTCUT];
 
-    const fragment = document.createDocumentFragment();
+    const tooltip = $.make('div', this.CSS.buttonTooltip);
     const hint = document.createTextNode(_.capitalize(name));
 
-    fragment.appendChild(hint);
+    tooltip.appendChild(hint);
 
     if (shortcut) {
-      const OS = _.getUserOS();
+      shortcut = _.beautifyShortcut(shortcut);
 
-      shortcut = shortcut
-        .replace(/shift/gi, '⇧')
-        .replace(/backspace/gi, '⌫')
-        .replace(/enter/gi, '⏎')
-        .replace(/up/gi, '↑')
-        .replace(/left/gi, '→')
-        .replace(/down/gi, '↓')
-        .replace(/right/gi, '←')
-        .replace(/escape/gi, '⎋')
-        .replace(/insert/gi, 'Ins')
-        .replace(/delete/gi, '␡')
-        .replace(/\+/gi, ' + ');
-
-      if (OS.mac) {
-        shortcut = shortcut.replace(/ctrl|cmd/gi, '⌘').replace(/alt/gi, '⌥');
-      } else {
-        shortcut = shortcut.replace(/cmd/gi, 'Ctrl').replace(/windows/gi, 'WIN');
-      }
-
-      fragment.appendChild($.make('div', this.CSS.tooltipShortcut, {
+      tooltip.appendChild($.make('div', this.CSS.buttonShortcut, {
         textContent: shortcut,
       }));
     }
 
-    const leftOffset = 16;
-    const coordinate = button.offsetLeft;
-    const topOffset = Math.floor(this.Editor.BlockManager.currentBlock.holder.offsetHeight / 2);
-
-    this.nodes.tooltip.innerHTML = '';
-    this.nodes.tooltip.appendChild(fragment);
-
-    this.nodes.tooltip.style.left = `${coordinate + leftOffset}px`;
-    this.nodes.tooltip.style.transform = `translate3d(-50%, ${topOffset}px, 0)`;
-    this.nodes.tooltip.classList.add(this.CSS.tooltipShown);
+    return tooltip;
   }
 
   /**
@@ -368,11 +324,11 @@ export default class Toolbox extends Module {
    * @param {String} toolName - Tool name
    */
   private insertNewBlock(tool: BlockToolConstructable, toolName: string) {
-    const {BlockManager, Caret} = this.Editor;
+    const { BlockManager, Caret } = this.Editor;
     /**
      * @type {Block}
      */
-    const {currentBlock} = BlockManager;
+    const { currentBlock } = BlockManager;
 
     let newBlock;
 
@@ -385,7 +341,7 @@ export default class Toolbox extends Module {
     /**
      * Apply callback before inserting html
      */
-    newBlock.call('appendCallback', {});
+    newBlock.call(BlockToolAPI.APPEND_CALLBACK);
 
     this.Editor.Caret.setToBlock(newBlock);
 

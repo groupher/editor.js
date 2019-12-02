@@ -2,8 +2,8 @@ import SelectionUtils from '../selection';
 
 import $ from '../dom';
 import * as _ from '../utils';
-import {API, InlineTool, SanitizerConfig} from '../../../types';
-import {Notifier, Toolbar} from '../../../types/api';
+import { API, InlineTool, SanitizerConfig } from '../../../types';
+import { Notifier, Toolbar } from '../../../types/api';
 
 /**
  * Link Tool
@@ -13,7 +13,6 @@ import {Notifier, Toolbar} from '../../../types/api';
  * Wrap selected text with <a> tag
  */
 export default class LinkInlineTool implements InlineTool {
-
   /**
    * Specifies Tool as Inline Toolbar Tool
    *
@@ -24,7 +23,7 @@ export default class LinkInlineTool implements InlineTool {
   /**
    * Title for hover-tooltip
    */
-  public static title: string = 'Link';
+  public static title: string = '链接';
 
   /**
    * Sanitizer Rule
@@ -103,7 +102,7 @@ export default class LinkInlineTool implements InlineTool {
   /**
    * @param {{api: API}} - Editor.js API
    */
-  constructor({api}) {
+  constructor({ api }) {
     this.toolbar = api.toolbar;
     this.inlineToolbar = api.inlineToolbar;
     this.notifier = api.notifier;
@@ -127,7 +126,7 @@ export default class LinkInlineTool implements InlineTool {
    */
   public renderActions(): HTMLElement {
     this.nodes.input = document.createElement('input') as HTMLInputElement;
-    this.nodes.input.placeholder = 'Add a link';
+    this.nodes.input.placeholder = '输入链接地址';
     this.nodes.input.classList.add(this.CSS.input);
     this.nodes.input.addEventListener('keydown', (event: KeyboardEvent) => {
       if (event.keyCode === this.ENTER_KEY) {
@@ -277,7 +276,6 @@ export default class LinkInlineTool implements InlineTool {
     }
 
     if (!this.validateURL(value)) {
-
       this.notifier.show({
         message: 'Pasted link is not valid.',
         style: 'error',
@@ -362,7 +360,6 @@ export default class LinkInlineTool implements InlineTool {
    * @param {string} link - "href" value
    */
   private insertLink(link: string): void {
-
     /**
      * Edit all link, not selected part
      */

@@ -1,5 +1,5 @@
 import $ from '../dom';
-import {API, InlineTool, SanitizerConfig} from '../../../types';
+import { API, InlineTool, SanitizerConfig } from '../../../types';
 
 /**
  * Bold Tool
@@ -9,7 +9,6 @@ import {API, InlineTool, SanitizerConfig} from '../../../types';
  * Makes selected text bolder
  */
 export default class BoldInlineTool implements InlineTool {
-
   /**
    * Specifies Tool as Inline Toolbar Tool
    *
@@ -20,7 +19,7 @@ export default class BoldInlineTool implements InlineTool {
   /**
    * Title for hover-tooltip
    */
-  public static title: string = 'Bold';
+  public static title: string = '加粗';
 
   /**
    * Sanitizer Rule
@@ -50,7 +49,7 @@ export default class BoldInlineTool implements InlineTool {
   /**
    * Elements
    */
-  private nodes: {button: HTMLButtonElement} = {
+  private nodes: { button: HTMLButtonElement } = {
     button: undefined,
   };
 

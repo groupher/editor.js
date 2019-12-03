@@ -172,7 +172,8 @@ export default class Toolbox extends Module {
     const tools = this.Editor.Tools.available;
 
     for (const toolName in tools) {
-      if (tools.hasOwnProperty(toolName)) {
+      // groupher-customize, old: not filter paragraph
+      if (tools.hasOwnProperty(toolName) && toolName !== 'paragraph') {
         this.addTool(toolName, tools[toolName] as BlockToolConstructable);
       }
     }

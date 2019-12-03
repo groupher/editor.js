@@ -125,7 +125,7 @@ export default class Toolbox extends Module {
     this.flipper.deactivate();
 
     // groupher-customize
-    // this.resetPlusButton();
+    this.resetPlusButton();
   }
 
   /**
@@ -140,24 +140,17 @@ export default class Toolbox extends Module {
   }
 
   /**
-   * Hide toolbox tooltip
-   */
-  // public hideTooltip(): void {
-  //   this.nodes.tooltip.classList.remove(this.CSS.tooltipShown);
-  // }
-
-  /**
    * set plus button to add, only when toolbar is closed
    * groupher-customize
    */
-  // private resetPlusButton(): void {
-  //   if (!this.opened) {
-  //     const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
-  //     if (plusButton) {
-  //       plusButton.style.transform = '';
-  //     }
-  //   }
-  // }
+  private resetPlusButton(): void {
+    if (!this.opened) {
+      const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
+      if (plusButton) {
+        plusButton.style.transform = '';
+      }
+    }
+  }
 
   /**
    * set plus button to cross

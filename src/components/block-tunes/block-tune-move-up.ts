@@ -5,7 +5,7 @@
  * @copyright <CodeX Team> 2018
  */
 import $ from '../dom';
-import {API, BlockTune} from '../../../types';
+import { API, BlockTune } from '../../../types';
 
 export default class MoveUpTune implements BlockTune {
 
@@ -30,7 +30,7 @@ export default class MoveUpTune implements BlockTune {
    *
    * @param {{api: API}} api
    */
-  public constructor({api}) {
+  public constructor({ api }) {
     this.api = api;
   }
 
@@ -46,12 +46,13 @@ export default class MoveUpTune implements BlockTune {
       'click',
       (event) => this.handleClick(event as MouseEvent, moveUpButton),
       false,
-      );
+    );
 
     /**
      * Enable tooltip module on button
      */
-    this.api.tooltip.onHover(moveUpButton, 'Move up');
+    // groupher-customize
+    this.api.tooltip.onHover(moveUpButton, '上移');
 
     return moveUpButton;
   }
@@ -68,7 +69,7 @@ export default class MoveUpTune implements BlockTune {
     if (currentBlockIndex === 0) {
       button.classList.add(this.CSS.animation);
 
-      window.setTimeout( () => {
+      window.setTimeout(() => {
         button.classList.remove(this.CSS.animation);
       }, 500);
       return;

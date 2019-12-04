@@ -6,7 +6,7 @@
  */
 
 import $ from '../dom';
-import {API, BlockTune} from '../../../types';
+import { API, BlockTune } from '../../../types';
 
 export default class MoveDownTune implements BlockTune {
   /**
@@ -30,7 +30,7 @@ export default class MoveDownTune implements BlockTune {
    *
    * @param {{api: API}} api
    */
-  public constructor({api}) {
+  public constructor({ api }) {
     this.api = api;
   }
 
@@ -50,7 +50,8 @@ export default class MoveDownTune implements BlockTune {
     /**
      * Enable tooltip module on button
      */
-    this.api.tooltip.onHover(moveDownButton, 'Move down');
+    // groupher-customize
+    this.api.tooltip.onHover(moveDownButton, '下移');
 
     return moveDownButton;
   }
@@ -68,7 +69,7 @@ export default class MoveDownTune implements BlockTune {
     if (currentBlockIndex === this.api.blocks.getBlocksCount() - 1) {
       button.classList.add(this.CSS.animation);
 
-      window.setTimeout( () => {
+      window.setTimeout(() => {
         button.classList.remove(this.CSS.animation);
       }, 500);
       return;

@@ -4,7 +4,7 @@
  *
  * @copyright <CodeX Team> 2018
  */
-import {API, BlockTune} from '../../../types';
+import { API, BlockTune } from '../../../types';
 import $ from '../dom';
 
 export default class DeleteTune implements BlockTune {
@@ -37,7 +37,7 @@ export default class DeleteTune implements BlockTune {
   /**
    * Tune nodes
    */
-  private nodes: {button: HTMLElement} = {
+  private nodes: { button: HTMLElement } = {
     button: null,
   };
 
@@ -46,7 +46,7 @@ export default class DeleteTune implements BlockTune {
    *
    * @param {{api: API}} api
    */
-  constructor({api}) {
+  constructor({ api }) {
     this.api = api;
 
     this.resetConfirmation = () => {
@@ -66,7 +66,8 @@ export default class DeleteTune implements BlockTune {
     /**
      * Enable tooltip module
      */
-    this.api.tooltip.onHover(this.nodes.button, 'Delete');
+    // groupher-customize
+    this.api.tooltip.onHover(this.nodes.button, '删除');
 
     return this.nodes.button;
   }

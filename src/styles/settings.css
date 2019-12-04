@@ -1,19 +1,20 @@
 .ce-settings {
   @apply --overlay-pane;
   right: 5px;
-  top: 35px;
+  /* groupher-customize */
+  top: 15px;
   min-width: 114px;
 
-  @media (--mobile){
+  @media (--mobile) {
     bottom: 50px;
     top: auto;
   }
 
-  &::before{
+  &::before {
     left: auto;
     right: 12px;
 
-    @media (--mobile){
+    @media (--mobile) {
       bottom: -5px;
       top: auto;
     }
@@ -28,13 +29,13 @@
   }
 
   &__plugin-zone {
-    &:not(:empty){
+    &:not(:empty) {
       padding: 3px 3px 0;
     }
   }
 
   &__default-zone {
-    &:not(:empty){
+    &:not(:empty) {
       padding: 3px;
     }
   }
@@ -44,19 +45,19 @@
     /* groupher-customize  */
     color: var(--grayText);
 
-    &:not(:nth-child(3n+3)) {
+    &:not(:nth-child(3n + 3)) {
       margin-right: 3px;
     }
 
-    &:nth-child(n+4) {
+    &:nth-child(n + 4) {
       margin-top: 3px;
     }
 
     line-height: 32px;
 
     &--disabled {
-        cursor: not-allowed !important;
-        opacity: .3;
+      cursor: not-allowed !important;
+      opacity: 0.3;
     }
 
     &--selected {
@@ -78,7 +79,9 @@
       color: #fff;
 
       &:hover {
-        background-color: color-mod(var(--color-confirm) blackness(+5%)) !important;
+        background-color: color-mod(
+          var(--color-confirm) blackness(+5%)
+        ) !important;
       }
 
       .icon {

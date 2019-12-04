@@ -36,6 +36,8 @@
  */
 .cdx-settings-button {
   @apply --toolbar-button;
+  /* groupher-customize */
+  color: var(--grayText);
 
   &:not(:nth-child(3n+3)) {
     margin-right: 3px;

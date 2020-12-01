@@ -96,6 +96,7 @@ export default class BoldInlineTool implements InlineTool {
    * @returns {boolean}
    */
   public get shortcut(): string {
-    return 'CMD+B';
+    // groupher-customize
+    return 'CMD+SHIFT+B';
   }
 }

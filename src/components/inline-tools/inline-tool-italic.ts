@@ -92,6 +92,7 @@ export default class ItalicInlineTool implements InlineTool {
    * Set a shortcut
    */
   public get shortcut(): string {
-    return 'CMD+I';
+    // groupher-customize
+    return 'CMD+SHIFT+I';
   }
 }

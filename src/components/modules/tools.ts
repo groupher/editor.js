@@ -387,7 +387,8 @@ export default class Tools extends Module {
   public get internalTools(): { [toolName: string]: ToolConstructable | ToolSettings } {
     return {
       bold: { class: BoldInlineTool },
-      italic: { class: ItalicInlineTool },
+      // groupher-customize
+      // italic: { class: ItalicInlineTool },
       link: { class: LinkInlineTool },
       paragraph: {
         class: Paragraph,

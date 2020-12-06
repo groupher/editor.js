@@ -169,6 +169,8 @@ export default class Toolbox extends Module<ToolboxNodes> {
       const plusButton: HTMLElement = document.querySelector('.' + this.CSS.plusButton);
       if (plusButton) {
         plusButton.style.transform = ''
+        plusButton.style['margin-top'] = '-1px';
+        plusButton.style.opacity = '0.6';
       }
     }
   }
@@ -183,6 +185,8 @@ export default class Toolbox extends Module<ToolboxNodes> {
 
     if (plusButton && !hasRotated) {
       plusButton.style.transform = plusButton.style.transform + 'translateY(-50%) rotate(45deg)';
+      plusButton.style['margin-top'] = 0;
+      plusButton.style.opacity = '0.6';
     }
   }
 

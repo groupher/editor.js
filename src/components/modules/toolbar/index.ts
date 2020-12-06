@@ -190,6 +190,8 @@ export default class Toolbar extends Module<ToolbarNodes> {
       // groupher-customize
       // the original transform will conflict with the plus button rotate effects
       this.nodes.plusButton.style.top = `calc(${contentOffset}px - 50%)`;
+      this.nodes.plusButton.style['margin-top'] = '-1px';
+      this.nodes.plusButton.style.opacity = '0.6';
       this.Editor.Toolbox.nodes.toolbox.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
     } else {
       toolbarY += blockHeight;

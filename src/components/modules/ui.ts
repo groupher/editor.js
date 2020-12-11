@@ -502,7 +502,7 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private enterPressed(event: KeyboardEvent): void {
-    const { BlockManager, BlockSelection, Caret } = this.Editor;
+    const { BlockManager, BlockSelection } = this.Editor;
     const hasPointerToBlock = BlockManager.currentBlockIndex >= 0;
 
     /**
@@ -726,7 +726,7 @@ export default class UI extends Module<UINodes> {
    */
   private selectionChanged(event: Event): void {
     const { CrossBlockSelection, BlockSelection } = this.Editor;
-    const focusedElement = Selection.anchorElement as Element;
+    const focusedElement = Selection.anchorElement;
 
     if (CrossBlockSelection.isCrossBlockSelectionStarted) {
       // Removes all ranges when any Block is selected
@@ -748,6 +748,13 @@ export default class UI extends Module<UINodes> {
       }
 
       return;
+    }
+
+    /**
+     * Set current block when entering to Editor.js by tab key
+     */
+    if (!this.Editor.BlockManager.currentBlock) {
+      this.Editor.BlockManager.setCurrentBlockByChildNode(focusedElement);
     }
 
     /**

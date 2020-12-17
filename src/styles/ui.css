@@ -5,6 +5,10 @@
   position: relative;
   box-sizing: border-box;
   z-index: 1;
+  /* groupher-customize */
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC,
+    Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei,
+    sans-serif;
 
   .hide {
     display: none;
@@ -51,7 +55,7 @@
     height: 30vh;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       top: 50%;
@@ -93,10 +97,10 @@
     }
 
     &__rectangle {
-       position: absolute;
-       pointer-events: none;
-       background-color: rgba(46, 170, 220, 0.2);
-       border: 1px solid transparent;
+      position: absolute;
+      pointer-events: none;
+      background-color: rgba(46, 170, 220, 0.2);
+      border: 1px solid transparent;
     }
   }
 
@@ -110,11 +114,12 @@
 /**
  * Set color for native selection
  */
-::selection{
+::selection {
   background-color: var(--inlineSelectionColor);
 }
 
-.codex-editor--toolbox-opened [contentEditable=true][data-placeholder]:focus::before {
+.codex-editor--toolbox-opened
+  [contentEditable="true"][data-placeholder]:focus::before {
   opacity: 0 !important;
 }
 

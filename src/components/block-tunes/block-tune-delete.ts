@@ -64,7 +64,8 @@ export default class DeleteTune implements BlockTune {
    */
   public render(): HTMLElement {
     this.nodes.button = $.make('div', [this.CSS.button, this.CSS.buttonDelete], {});
-    this.nodes.button.appendChild($.svg('cross', 12, 12));
+    /* groupher-customize */
+    this.nodes.button.appendChild($.svg('cross', 11, 11));
     this.api.listeners.on(this.nodes.button, 'click', (event: MouseEvent) => this.handleClick(event), false);
 
     /**

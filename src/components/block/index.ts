@@ -586,18 +586,19 @@ export default class Block {
    * @returns {BlockTune[]}
    */
   public makeTunes(): BlockTune[] {
+    /* groupher-customize */
     const tunesList = [
       {
         name: 'moveUp',
         Tune: MoveUpTune,
       },
       {
-        name: 'delete',
-        Tune: DeleteTune,
-      },
-      {
         name: 'moveDown',
         Tune: MoveDownTune,
+      },
+      {
+        name: 'delete',
+        Tune: DeleteTune,
       },
     ];
 

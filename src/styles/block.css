@@ -4,7 +4,9 @@
   }
 
   &--selected &__content {
-    background: var(--selectionColor);
+    /* groupher-customize */
+    border-right: 2px solid;
+    border-right-color: var(--selectionColor);
 
     /**
      * Workaround Safari case when user can select inline-fragment with cross-block-selection
@@ -16,7 +18,8 @@
 
     img,
     .ce-stub {
-      opacity: 0.55;
+      /* groupher-customize */
+      opacity: 1;
     }
   }
 
@@ -28,12 +31,14 @@
     position: relative;
     max-width: var(--content-width);
     margin: 0 auto;
+    /* groupher-customize */
+    border-right: 2px solid transparent;
     transition: background-color 150ms ease;
   }
 
   &--drop-target &__content {
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: 100%;
       left: -20px;
@@ -47,7 +52,7 @@
     }
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 100%;
       height: 1px;

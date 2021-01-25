@@ -50,7 +50,9 @@
   }
 
   &__dropdown {
-    display: inline-flex;
+    /* groupher-customize */
+    display: none;
+    /* display: inline-flex; */
     height: var(--toolbar-buttons-size);
     /* groupher-customize */
     /* padding: 0 9px 0 10px; */

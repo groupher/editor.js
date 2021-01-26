@@ -44,6 +44,9 @@
 
   &__buttons {
     display: flex;
+    /* groupher-customize */
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
   &__actions {
@@ -104,17 +107,18 @@
 
   /* groupher-customize */
   /* first bold tool */
-  &:first-of-type {
+  /* &:first-of-type {
     padding-left: 8px !important;
     padding-right: 6px !important;
-  }
+  } */
 
-  &:not(:last-of-type) {
+  /* &:not(:last-of-type) {
     margin-right: 2px;
-  }
+  } */
 
   .icon {
-    height: 12px;
+    /* groupher-customize */
+    height: 14px;
   }
 
   &--link {

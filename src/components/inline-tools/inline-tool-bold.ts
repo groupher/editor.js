@@ -61,7 +61,13 @@ export default class BoldInlineTool implements InlineTool {
     this.nodes.button = document.createElement('button') as HTMLButtonElement;
     this.nodes.button.type = 'button';
     this.nodes.button.classList.add(this.CSS.button, this.CSS.buttonModifier);
-    this.nodes.button.appendChild($.svg('bold', 12, 14));
+    // groupher-customize 
+    const SvgIcon = $.svg('bold', 12, 12);
+    // groupher-customize 
+    SvgIcon.style.opacity = '0.65'
+    SvgIcon.style.height = '13px'
+    SvgIcon.style['margin-right'] = '2px'
+    this.nodes.button.appendChild(SvgIcon);
 
     return this.nodes.button;
   }

@@ -648,9 +648,15 @@ export default class UI extends Module<UINodes> {
     this.Editor.Toolbar.open();
 
     /**
-     * Hide the Plus Button
+     * groupher-customize
+     * Hide the Plus Button only when clickedNode content is not empty
+     * otherwise it will cause plus button blink
+     * 
+     * 只有在当前点击的 node 不为空时才隐藏 plusButton, 否则会造成 plusButton 闪烁
      */
-    this.Editor.Toolbar.plusButton.hide();
+    if (clickedNode.innerHTML !== '') {
+      this.Editor.Toolbar.plusButton.hide();
+    }
   }
 
   /**

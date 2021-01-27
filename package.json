@@ -1,6 +1,6 @@
 {
   "name": "@groupher/editor.js",
-  "version": "2.19.31",
+  "version": "2.19.32",
   "description": "Editor.js — Native JS, based on API and Open Source",
   "main": "dist/editor.js",
   "types": "./types/index.d.ts",

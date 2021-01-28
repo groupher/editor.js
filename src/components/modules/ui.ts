@@ -653,10 +653,9 @@ export default class UI extends Module<UINodes> {
      * otherwise it will cause plus button blink
      * 
      * 只有在当前点击的 node 不为空时才隐藏 plusButton, 否则会造成 plusButton 闪烁
-     * 当 nodeName INPUT 时（比如 collapse 工具），editor.js 第一次会出现误判，这里
-     * 需要特别采用手动判断
+     *（比如 collapse 工具），editor.js 第一次会出现误判，这里需要特别采用手动判断
      */
-    if (clickedNode.innerHTML !== '' || clickedNode.nodeName === "INPUT") {
+    if (clickedNode.innerHTML !== '' || clickedNode.dataset.skipPlusButton === "true") {
       this.Editor.Toolbar.plusButton.hide();
     }
   }

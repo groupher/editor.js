@@ -10,6 +10,7 @@
     Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei,
     sans-serif;
   font-size: 15px;
+  -webkit-font-smoothing: antialiased !important;
 
   .hide {
     display: none;
